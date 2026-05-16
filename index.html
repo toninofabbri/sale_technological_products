@@ -1469,6 +1469,176 @@ body {
   transform: translateY(0);
 }
 
+
+
+        /* ========== OVERLAY ========== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.65); /* --dark con trasparenza */
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s var(--transition), visibility 0.4s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ========== MODALE ========== */
+        .modal {
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            padding: 40px 36px;
+            max-width: 520px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s var(--transition);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Barra gradiente superiore */
+        .modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+
+        /* Pulsante chiudi */
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            border-radius: 50%;
+            color: var(--gray-500);
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--white);
+            color: var(--dark);
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Badge */
+        .modal-badge {
+            display: inline-block;
+            padding: 5px 14px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        /* Titolo */
+        .modal-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 14px;
+            color: var(--dark);
+            line-height: 1.25;
+        }
+
+        /* Descrizione */
+        .modal-description {
+            font-size: 15px;
+            color: var(--gray-700);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        /* Tag tecnologie */
+        .modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+
+        .modal-tag {
+            padding: 6px 12px;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Prezzo */
+        .modal-price {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+        }
+
+        .modal-price-label {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        .modal-price-value {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-left: auto;
+        }
+
+        /* ========== CONTENUTO PAGINA (demo) ========== */
+        .page-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .page-content h1 {
+            font-size: 20px;
+            color: var(--gray-500);
+            font-weight: 400;
+        }
+
 /* ===== RESPONSIVE ===== */
 
 /* Tablet */
@@ -2044,6 +2214,37 @@ body {
   <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 
+
+
+<!-- ====== MODALE ====== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modalClose" aria-label="Chiudi modale">✕</button>
+
+            <span class="modal-badge">In Vendita</span>
+            <h2 class="modal-title">Sito Dimostrativo in Vendita</h2>
+            <p class="modal-description">
+                Questo sito web è una demo professionale creata per mostrare le potenzialità di una
+                landing page per la vendita di miele e prodotti locali. Ha ottime performance, è
+                ottimizzato SEO e include un vero modulo di contatto.
+            </p>
+
+            <div class="modal-tags">
+                <span class="modal-tag">PHP</span>
+                <span class="modal-tag">JavaScript</span>
+                <span class="modal-tag">CSS3</span>
+                <span class="modal-tag">HTML5</span>
+            </div>
+
+            <div class="modal-price">
+                <span class="modal-price-label">In vendita a partire da</span>
+                <span class="modal-price-value">€ 100</span>
+            </div>
+        </div>
+    </div>
+
+
+
 <script>
 // ===== PRODUCT DATA =====
 const allProducts = [
@@ -2390,6 +2591,46 @@ document.querySelectorAll('.nav-link').forEach(function(link) {
 // ===== INIT =====
 renderProducts();
 </script>
+
+<script>
+  //========= MODALE DI PRESENTAZIONE =========================
+        (() => {
+            const overlay  = document.getElementById('modalOverlay');
+            const modal    = document.getElementById('modal');
+            const closeBtn = document.getElementById('modalClose');
+
+            // Apertura automatica al caricamento completo
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Blocca scroll
+                }, 400); // Ritardo minimo per animazione fluida
+            });
+
+            // Funzione di chiusura
+            function closeModal() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = ''; // Riattiva scroll
+            }
+
+            // Click su pulsante X
+            closeBtn.addEventListener('click', closeModal);
+
+            // Click fuori dalla modale
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    closeModal();
+                }
+            });
+
+            // Tasto ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
 
